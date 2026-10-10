@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Govt Job Alerts & Blog Views Portal</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <!-- PWA Fullscreen Meta Tags (Hides Browser Address Bar on Mobile) -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#020617">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-blue-600 selection:text-white pb-20 md:pb-0">
+
+    <!-- MAIN APP WRAPPER (Direct Access - No Login) -->
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- DESKTOP SIDEBAR -->
+        <aside class="hidden md:flex w-64 bg-slate-900 border-r border-slate-800 flex-col justify-between shrink-0">
+            <div>
+                <!-- Brand Header (Clean - No URL visible) -->
+                <div class="p-5 border-b border-slate-800/80 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-600/20">
+                        <i data-lucide="bell-ring" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base text-white leading-tight">Job Radar & Views</h2>
+                        <span class="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Sync Online
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="p-3 space-y-1.5">
+                    <button onclick="switchTab('jobs')" id="nav-jobs" class="nav-btn active w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="radio" class="w-5 h-5 text-red-400 animate-pulse"></i> 
+                            <span>Govt Job Alerts</span>
+                        </div>
+                        <span id="badgeJobCount" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-950 border border-red-500/40 text-red-400">Live</span>
+                    </button>
+
+                    <button onclick="switchTab('views')" id="nav-views" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="eye" class="w-5 h-5 text-blue-400"></i> 
+                            <span>Blog Post Views</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-950 border border-blue-500/40 text-blue-400">Stats</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Bottom Information -->
+            <div class="p-4 border-t border-slate-800/80 bg-slate-900/60">
+                <div class="flex items-center gap-2 text-xs text-slate-400">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Google Blogger v3 Connected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-950">
+            
+            <!-- TOP APP HEADLINE / BRANDING TOOLBAR -->
+            <header class="bg-gradient-to-r from-blue-950 via-slate-900 to-slate-900 border-b border-slate-800 px-4 py-3 sm:px-6 flex items-center justify-between shadow-md shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/25 shrink-0">
+                        <i data-lucide="bell-ring" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-lg font-black text-white tracking-wide uppercase leading-tight">
+                            ROJGAR & KRISHI JOB RADAR
+                        </h1>
+                        <p class="text-[11px] text-blue-400 font-semibold flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Official Sarkari & Agriculture Job Alerts
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Controls: Blog Switcher & Quick Refresh -->
+                <div class="flex items-center gap-2">
+                    <!-- Blog Switcher (Pill) -->
+                    <div class="flex items-center bg-slate-800/90 border border-slate-700/80 rounded-xl p-1 gap-1">
+                        <button onclick="setActiveBlog('rojgar')" id="btn-blog-rojgar" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition bg-blue-600 text-white shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-200"></span> <span class="hidden sm:inline">Rojgar</span>
+                        </button>
+                        <button onclick="setActiveBlog('krishi')" id="btn-blog-krishi" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition text-slate-400 hover:text-white">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> <span class="hidden sm:inline">Krishi</span>
+                        </button>
+                    </div>
+
+                    <!-- Refresh Button -->
+                    <button onclick="refreshCurrentData()" id="refreshBtn" class="p-2 sm:px-3 sm:py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl border border-slate-700 transition flex items-center gap-1.5" title="Refresh">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 text-blue-400"></i>
+                        <span class="hidden sm:inline">Refresh</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- SCROLLABLE TAB CONTENTS -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+
+                <!-- ========================================== -->
+                <!-- TAB 1: GOVT JOB RADAR (EXTERNAL SARKARI)  -->
+                <!-- ========================================== -->
+                <section id="tab-jobs" class="tab-content space-y-5">
+                    
+                    <!-- Header Banner -->
+                    <div class="bg-gradient-to-r from-blue-950/60 via-slate-900 to-slate-900 border border-slate-800 p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i data-lucide="radio" class="w-6 h-6 text-red-400 animate-pulse"></i> 
+                                Latest Govt Job Notifications
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">
+                                SarkariResult, Official Police, Navy, SSC, Railway एवं अन्य सरकारी विभागों की लाइव भर्तियां।
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <!-- Search Input -->
+                            <div class="relative w-full sm:w-64">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-500"></i>
+                                <input type="text" id="jobSearchInput" oninput="debounceJobSearch()" placeholder="Search job, post, qualification..." class="w-full pl-9 pr-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORIES MENU (Horizontal Scrollable Pills) -->
+                    <div class="overflow-x-auto pb-1 scrollbar-none">
+                        <div class="flex items-center gap-2 min-w-max">
+                            <button onclick="selectCategory('all')" id="cat-all" class="cat-pill active px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-md shadow-blue-600/20">
+                                🌟 All (सभी भर्तियां)
+                            </button>
+                            <button onclick="selectCategory('latest')" id="cat-latest" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                🔥 Latest Jobs
+                            </button>
+                            <button onclick="selectCategory('police')" id="cat-police" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                👮 Police (पुलिस)
+                            </button>
+                            <button onclick="selectCategory('ssc')" id="cat-ssc" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                🏛️ SSC (कर्मचारी चयन)
+                            </button>
+                            <button onclick="selectCategory('navy')" id="cat-navy" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                ⚓ Navy & Defence (नेवी/डिफेंस)
+                            </button>
+                            <button onclick="selectCategory('railway')" id="cat-railway" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                🚆 Railway (रेलवे)
+                            </button>
+                            <button onclick="selectCategory('bank')" id="cat-bank" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                🏦 Bank (बैंक)
+                            </button>
+                            <button onclick="selectCategory('krishi')" id="cat-krishi" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                🌾 Krishi / Agriculture
+                            </button>
+                            <button onclick="selectCategory('teaching')" id="cat-teaching" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                                📚 Teaching (शिक्षक भर्ती)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Job Alert Cards Grid -->
+                    <div id="jobsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Rendered dynamically by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- TAB 2: BLOG POST VIEWS TRACKER            -->
+                <!-- ========================================== -->
+                <section id="tab-views" class="tab-content hidden space-y-5">
+                    
+                    <!-- Overview Stats Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-medium text-slate-400">Total Live Posts</p>
+                                <h3 id="viewsTotalPosts" class="text-2xl font-bold text-white mt-1">--</h3>
+                                <p class="text-[11px] text-blue-400 mt-1 flex items-center gap-1">
+                                    <i data-lucide="check-circle" class="w-3 h-3"></i> Blogger v3 Synced
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/20">
+                                <i data-lucide="file-text" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-medium text-slate-400">Post Views Count</p>
+                                <h3 id="viewsTotalCounter" class="text-2xl font-bold text-emerald-400 mt-1">Live Views</h3>
+                                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+                                    <i data-lucide="eye" class="w-3 h-3 text-emerald-400"></i> Post-by-Post Breakdown
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-medium text-slate-400">Blogger Analytics</p>
+                                <a id="btnBloggerStatsLink" href="https://www.blogger.com" target="_blank" class="inline-flex items-center gap-1 text-sm font-bold text-orange-400 hover:text-orange-300 mt-2">
+                                    <span>Official Stats Graph</span>
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                                <p class="text-[11px] text-slate-500 mt-1">Real-time Google Analytics</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-orange-600/20 text-orange-400 flex items-center justify-center border border-orange-500/20">
+                                <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Filter for Posts -->
+                    <div class="flex items-center justify-between gap-4">
+                        <h4 class="font-bold text-base text-white flex items-center gap-2">
+                            <i data-lucide="list-checks" class="w-5 h-5 text-blue-400"></i>
+                            <span id="viewsBlogTitleDisplay">Rojgar Notification Posts</span>
+                        </h4>
+                        <input type="text" id="postSearchInput" oninput="filterPostsSearch()" placeholder="Search in your posts..." class="w-52 sm:w-72 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    </div>
+
+                    <!-- Posts Views Cards Container -->
+                    <div id="postsListContainer" class="space-y-3">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION (Visible on Mobile/Tablet) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 flex items-center justify-around py-2.5 px-2">
+        <button onclick="switchTab('jobs')" id="mobnav-jobs" class="flex flex-col items-center gap-1 p-1 text-blue-500">
+            <i data-lucide="radio" class="w-5 h-5"></i>
+            <span class="text-[11px] font-semibold">Job Alerts</span>
+        </button>
+        <button onclick="switchTab('views')" id="mobnav-views" class="flex flex-col items-center gap-1 p-1 text-slate-400">
+            <i data-lucide="eye" class="w-5 h-5"></i>
+            <span class="text-[11px] font-semibold">Post Views</span>
+        </button>
+    </nav>
+
+    <!-- EXIT APP CONFIRMATION MODAL (Hardware/Gesture Back Button Triggered) -->
+    <div id="exitModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 backdrop-blur-sm p-4">
+        <div class="w-full max-w-xs bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 text-center animate-scale-up">
+            <div class="w-14 h-14 mx-auto mb-3.5 rounded-2xl bg-red-600/20 text-red-400 flex items-center justify-center border border-red-500/30">
+                <i data-lucide="power" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-base font-bold text-white">Exit App / ऐप बंद करें?</h3>
+            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">क्या आप Rojgar & Krishi App से बाहर निकलना चाहते हैं?</p>
+            
+            <div class="mt-5 flex items-center gap-2.5">
+                <button onclick="dismissExitModal()" class="w-1/2 py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs rounded-xl transition">
+                    नहीं (Cancel)
+                </button>
+                <button onclick="confirmExitApp()" class="w-1/2 py-2.5 px-3 bg-red-600 hover:bg-red-500 text-white font-semibold text-xs rounded-xl shadow-md shadow-red-600/30 transition">
+                    हाँ, Exit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
